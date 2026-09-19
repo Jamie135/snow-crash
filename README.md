@@ -60,6 +60,15 @@ level00
 Une fois connecté, l'invite devient quelque chose comme
 `level00@SnowCrash:~$`. Tu es dans la VM, prêt à commencer le premier niveau.
 
-> Astuce : si tu réinstalles/réimportes la VM plus tard, SSH peut refuser la
-> connexion en signalant un changement de clé d'hôte. Efface l'ancienne clé avec :
-> `ssh-keygen -R '[127.0.0.1]:4242'`.
+## 3. Approches
+
+À chaque niveau, on déroule mentalement le même inventaire jusqu'à ce qu'un truc accroche :
+
+```bash
+ls -la  # 1. mon home : y a-t-il un fichier/programme bizarre ?
+cat /var/mail/levelXX # 2. un mail avec un indice ? (c'était le cas ici au 05 !)
+find / -user flagXX  2>/dev/null # 3. les fichiers possédés par flagXX
+find / -group flagXX 2>/dev/null # 4. ceux accessibles via son groupe
+find / -perm -4000   2>/dev/null # 5. les binaires setuid
+ls -la /etc/cron.d/ # 6. les tâches planifiées (cron)
+```
