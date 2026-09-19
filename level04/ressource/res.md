@@ -1,11 +1,5 @@
 # Level04
 
-> Objectif : faire exécuter `getflag` avec l'identité de `flag04` pour récupérer
-> le token (= mot de passe de `level05`). Ici, pas de binaire compilé : le home
-> contient un **script Perl** lisible.
-
----
-
 ## Résumé en une phrase
 
 Le home de `level04` contient `level04.pl`, un script Perl **setuid `flag04`**

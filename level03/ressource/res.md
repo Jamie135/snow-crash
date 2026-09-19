@@ -1,11 +1,5 @@
 # Level03
 
-> Objectif du niveau : depuis le compte `level03`, réussir à exécuter le
-> programme `getflag` **avec l'identité de `flag03`**, pour récupérer le token
-> (= mot de passe de `level04`).
-
----
-
 ## Résumé en une phrase
 
 Le home de `level03` contient un petit programme **setuid** (il s'exécute avec
