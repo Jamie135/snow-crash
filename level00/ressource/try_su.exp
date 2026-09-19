@@ -1,0 +1,29 @@
+#!/usr/bin/expect -f
+set timeout 10
+
+set host      [lindex $argv 0]
+set port      [lindex $argv 1]
+set ssh_user  [lindex $argv 2]
+set ssh_pass  [lindex $argv 3]
+set su_user   [lindex $argv 4]
+set candidate [lindex $argv 5]
+
+log_user 0
+
+#spawn = fork() + création d'un pty + exec()
+spawn ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $ssh_user@$host -p $port
+
+expect "password:"
+send "$ssh_pass\r"
+
+expect "\$ "
+send "su $su_user\r"
+
+expect "Password:"
+send "$candidate\r"
+
+expect {
+    -re "Authentication failure" { puts "FAIL"; exit 1 }
+    -re "Don't forget to launch getflag !" { puts "SUCCESS"; exit 0 }
+    timeout { puts "TIMEOUT"; exit 2 }
+}
