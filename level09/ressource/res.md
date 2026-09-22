@@ -43,8 +43,7 @@ Le binaire prend une chaîne et en renvoie une **version transformée** : c'est
 **l'encodeur** qui a produit le token.
 
 ```bash
-./level09
-./level09 AAAAAAAAAA
+./level09 AAAA → ABCD
 ```
 
 En donnant une chaîne de **caractères identiques**, on isole l'effet de la
