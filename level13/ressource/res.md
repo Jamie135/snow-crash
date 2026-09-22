@@ -18,25 +18,12 @@ fonction de bibliothèque (`LD_PRELOAD`) sur une copie**.
 ```bash
 ls -la
 file level13
-ls -l level13       # -rwsr-sr-x  1 flag13 level13  ... level13  -> setuid flag13
-./level13
-```
-
-Au lancement :
-
-```
-UID 2013 started us but we we expect 4242
+./level13 → UID 2013 started us but we we expect 4242
 ```
 
 Le programme **lit mon UID réel** (`2013` = `level13`) et le compare à une valeur
 codée en dur (**4242**). Comme ça ne correspond pas, il s'arrête. Le seul verrou
 du niveau est **ce contrôle d'UID**.
-
----
-
-## Observation du comportement
-
-### Comment il vérifie
 
 ```bash
 ltrace ./level13
@@ -45,18 +32,17 @@ ltrace ./level13
 On voit un appel **`getuid()`** dont le retour est comparé à `4242`. C'est bien la
 seule condition d'entrée.
 
-### D'où vient le token (question décisive)
-
 ```bash
-strace -e trace=open,openat,read ./level13
+strace -e trace=open ./level13
 ```
 
-**Aucun fichier appartenant à `flag13` n'est ouvert** → le token n'est pas lu sur
+**Confirme qu'aucun fichier appartenant à `flag13` n'est ouvert** → le token n'est pas lu sur
 le disque, il est **fabriqué en interne** par le programme.
 
 ➡️ Conséquence : je n'ai **pas besoin des droits de `flag13`**. Le token
 apparaîtra dès que je **passe le contrôle `getuid() == 4242`**, sans aucun
-privilège particulier.
+privilège particulier. 
+**Je peux donc créer ma propre `getuid()` qui retourne l'identité 4242.**
 
 ---
 
@@ -100,7 +86,7 @@ ls -l /tmp/lol/level13      # -rwxr-xr-x : un 'x', plus de 's' -> plus de setuid
 
 uid_t getuid(void)
 {
-    return 4242;      // on ment sur l'UID pour passer le contrôle
+    return 4242;
 }
 ```
 
