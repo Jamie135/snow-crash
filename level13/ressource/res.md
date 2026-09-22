@@ -36,7 +36,7 @@ seule condition d'entrée.
 strace -e trace=open ./level13
 ```
 
-**Confirme qu'aucun fichier appartenant à `flag13` n'est ouvert** → le token n'est pas lu sur
+**On confirme qu'aucun fichier appartenant à `flag13` n'est ouvert** → le token n'est pas lu sur
 le disque, il est **fabriqué en interne** par le programme.
 
 ➡️ Conséquence : je n'ai **pas besoin des droits de `flag13`**. Le token
