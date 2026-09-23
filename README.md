@@ -66,7 +66,7 @@ Une fois connecté, l'invite devient quelque chose comme
 
 ```bash
 ls -la  # 1. mon home : y a-t-il un fichier/programme bizarre ?
-cat /var/mail/levelXX # 2. un mail avec un indice ? (c'était le cas ici au 05 !)
+cat /var/mail/levelXX # 2. un mail avec un indice ?
 find / -user flagXX  2>/dev/null # 3. les fichiers possédés par flagXX
 find / -group flagXX 2>/dev/null # 4. ceux accessibles via son groupe
 find / -perm -4000   2>/dev/null # 5. les binaires setuid
